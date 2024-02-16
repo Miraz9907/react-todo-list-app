@@ -1,6 +1,71 @@
-import "./TodoList.css"
+import { useState } from "react";
+import "./TodoList.css";
+import { useEffect } from "react";
+
+const priorities = {
+    low: "green",
+    medium: "orange",
+    high: "red"
+};
 
 const TodoList = () => {
+    const [input, setInput] = useState('');
+    const [tasks, setTasks] = useState([]);
+    const [priority, setPriority] = useState('low');;
+    const [status, setStatus] = useState('incomplete');
+
+    useEffect(()=>{
+        //get tasks from localStorage
+        const storedTasks = JSON.parse(localStorage.getItem('todoTasks')) || [];
+        setTasks(storedTasks);
+    },[]);
+
+    //save tasks to LS
+    const savaTasksToLocalStorage = (updatedTasks) =>{
+        localStorage.setItem("todoTasks", JSON.stringify(updatedTasks));
+    }
+
+    const handleInputChange = (event) =>{
+        setInput(event.target.value);
+    };
+
+    const handlePriorityChange = (event) =>{
+        setPriority(event.target.value);
+    };
+
+    const handleStatusChange = (event) =>{
+        setStatus(event.target.value);
+    };
+
+    const handleAddTask =() =>{
+        if(input.trim() !== ''){
+            const newTasks = {
+                id: new Date().getTime(),
+                text: input,
+                priority,
+                status
+            };
+            // console.log(newTasks)
+
+            //tasks add to state
+            const updatedTasks = [...tasks, newTasks];
+            setTasks(updatedTasks)
+
+            //value pass to localstorage
+            savaTasksToLocalStorage(updatedTasks);
+
+            //after add task noe clear input fiels
+            setInput('');
+            setPriority('low');
+            setStatus('incomplete')
+        }
+        else{
+            alert('Please Add your Task before!!')
+        }
+    };
+
+    
+
    
     return (
         <div>
@@ -9,11 +74,11 @@ const TodoList = () => {
                 <div className="card">
                     <label>
                         Task: 
-                        <input type="text" />
+                        <input type="text" value={input} onChange={handleInputChange} />
                     </label>
                     <label>
                         Priority:
-                        <select>
+                        <select value={priority} onChange={handlePriorityChange}>
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>
@@ -21,13 +86,13 @@ const TodoList = () => {
                     </label>
                     <label>
                         Status:
-                        <select>
+                        <select value={status} onChange={handleStatusChange}>
                             <option value="incomplete">Incompleted</option>
                             <option value="complete">Completed</option>
                         </select>
                     </label>
                     <div className="add-btn">
-                    <button >Add Task</button>
+                    <button onClick={handleAddTask}>Add Task</button>
                     </div>
                 </div>
 
