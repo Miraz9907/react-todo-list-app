@@ -1,6 +1,9 @@
 import { useState } from "react";
-import "./TodoList.css";
 import { useEffect } from "react";
+import "./TodoList.css";
+import {FaEdit } from 'react-icons/fa';
+import { MdDeleteOutline } from "react-icons/md";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 
 const priorities = {
     low: "green",
@@ -113,6 +116,7 @@ const TodoList = () => {
             <div className="container">
                 <div className="card">
                     <h2 className="">Add your ToDos...</h2>
+                    <hr />
                     <label>
                         Task: 
                         <input type="text" value={input} onChange={handleInputChange} />
@@ -139,19 +143,20 @@ const TodoList = () => {
 
                 <div className="card">
                 <h2 className="">These are your ToDos...</h2>
-                    <ul>
+                <hr />
+                    <ul className="todo-list">
                         {tasks.map((task) => (
-                            <li key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
+                            <li  key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
                             {task.text} 
-                            <button onClick={() => handleEditTask(task.id)}>Edit</button>
-                            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                            <button  onClick={() => handleEditTask(task.id)}> <FaEdit></FaEdit> </button>
+                            <button onClick={() => handleDeleteTask(task.id)}> <MdDeleteOutline /> </button>
                             <button onClick={() => handleToggleStatus(task.id)}>
-                            {task.status === 'incomplete' ? 'Mark Completed' : 'Mark Incomplete'}
+                            {task.status === 'incomplete' ? <IoIosCheckmarkCircleOutline></IoIosCheckmarkCircleOutline> : 'X'}
                             </button>
                         </li>
                         ))}
                     </ul>
-                    <div>
+                    <div className="task-info">
                         <p>Total Tasks: {totalTasks}</p>
                         <p>Completed Tasks: {completedTasks}</p>
                         <p>Incompleted Tasks: {incompletedTasks}</p>

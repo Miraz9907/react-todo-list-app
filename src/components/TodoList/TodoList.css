@@ -28,6 +28,12 @@
     backdrop-filter: blur(5px);
 }
 
+.card hr{
+    width: 70%;
+    margin: auto;
+    border: 2px solid;
+    margin-bottom: 5px;
+}
 label{
     margin: 10px 0px;
     font-size: 30px;
@@ -57,4 +63,26 @@ select{
     font-size: 20px;
     border: none;
     outline: none;
+}
+.todo-list li{
+    font-size: 30px;
+    list-style: none;
+}
+.todo-list button{
+    margin-left:5px ;
+    font-size: 25px;
+    padding: 3px 9px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.task-info{
+    font-size: 20px;
+}
+@media (max-width:688px){
+    .container{
+        flex-direction: column;
+    }
+    
 }
