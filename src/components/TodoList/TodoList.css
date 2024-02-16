@@ -65,15 +65,18 @@ select{
     outline: none;
 }
 .todo-list li{
-    font-size: 30px;
+    font-size: 2rem;
     list-style: none;
 }
 .todo-list button{
-    margin-left:5px ;
+    margin-left:10px ;
     font-size: 25px;
     padding: 3px 9px;
-    background-color: transparent;
+    cursor: pointer;
+    background-color: wheat;
     border: none;
+    box-shadow: 2px 0px 5px black;
+    border-radius: 8px;
     outline: none;
 }
 

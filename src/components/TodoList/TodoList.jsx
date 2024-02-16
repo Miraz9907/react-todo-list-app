@@ -50,11 +50,9 @@ const TodoList = () => {
                 status
             };
             // console.log(newTasks)
-
             //tasks add to state
             const updatedTasks = [...tasks, newTasks];
             setTasks(updatedTasks)
-
             //value pass to localstorage
             savaTasksToLocalStorage(updatedTasks);
             Swal.fire({
@@ -63,8 +61,7 @@ const TodoList = () => {
                 title: "Your Todo Add on the list",
                 showConfirmButton: false,
                 timer: 2000
-              });
-
+            });
             //after add task now clear input fiels
             setInput('');
             setPriority('low');
@@ -75,18 +72,15 @@ const TodoList = () => {
                 icon: "error",
                 title: "Oops...",
                 text: "Please enter your task before adding.!"
-              });
-              
+            });
         }
     };
 
     const handleEditTask = (id) =>{
         const updatedText = prompt('Edit the Task: ', tasks.find(task => task.id === id)?.text);
-
         if(updatedText !== null){
             const updatedTasks = tasks.map(task => 
                 task.id === id? {...task, text: updatedText}:task);
-
                 //update state
                 setTasks(updatedTasks);
                 //save to localStorage
@@ -98,30 +92,28 @@ const TodoList = () => {
             title: "You have successfully edit your todo...",
             showConfirmButton: false,
             timer: 1500
-          });
-
+        });
     };
 
     const handleToggleStatus = (id) => {
         const updatedTasks = tasks.map(task =>
-          task.id === id ? { ...task, status: task.status === 'incomplete' ? 'completed' : 'incomplete' } : task
+        task.id === id ? { ...task, status: task.status === 'incomplete' ? 'completed' : 'incomplete' } : task
         );
     
         // Update state and save tasks to localStorage
         setTasks(updatedTasks);
         savaTasksToLocalStorage(updatedTasks);
-      };
+    };
 
     const handleDeleteTask = (id) => {
         const confirmed = window.confirm('Are you sure you want to delete this task?');
     
         if (confirmed) {
           // Remove task from the state
-          const updatedTasks = tasks.filter(task => task.id !== id);
-          setTasks(updatedTasks);
-    
+        const updatedTasks = tasks.filter(task => task.id !== id);
+        setTasks(updatedTasks);
           // Save tasks to localStorage
-          savaTasksToLocalStorage()
+        savaTasksToLocalStorage()
         //   saveTasksToLocalStorage(updatedTasks);
         }
         Swal.fire({
@@ -130,11 +122,8 @@ const TodoList = () => {
             title: "You have successfully delete your todo...",
             showConfirmButton: false,
             timer: 1500
-          });
-
-          
+        });
     };
-
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter(task => task.status === 'completed').length;
     const incompletedTasks = tasks.filter(task => task.status === 'incomplete').length;
@@ -170,7 +159,6 @@ const TodoList = () => {
                     <button onClick={handleAddTask}>Add Task</button>
                     </div>
                 </div>
-
                 <div className="card">
                 <h2 className="">These are your ToDos...</h2>
                 <hr />
