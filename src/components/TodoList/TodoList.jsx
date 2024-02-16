@@ -88,13 +88,31 @@ const TodoList = () => {
         savaTasksToLocalStorage(updatedTasks);
       };
 
+    const handleDeleteTask = (id) => {
+        const confirmed = window.confirm('Are you sure you want to delete this task?');
     
-   
+        if (confirmed) {
+          // Remove task from the state
+          const updatedTasks = tasks.filter(task => task.id !== id);
+          setTasks(updatedTasks);
+    
+          // Save tasks to localStorage
+          savaTasksToLocalStorage()
+        //   saveTasksToLocalStorage(updatedTasks);
+        }
+    };
+
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.status === 'completed').length;
+    const incompletedTasks = tasks.filter(task => task.status === 'incomplete').length;
+
+
     return (
         <div>
             <h1 className="title">My Awesome ToDo List</h1>
             <div className="container">
                 <div className="card">
+                    <h2 className="">Add your ToDos...</h2>
                     <label>
                         Task: 
                         <input type="text" value={input} onChange={handleInputChange} />
@@ -120,25 +138,24 @@ const TodoList = () => {
                 </div>
 
                 <div className="card">
-
-        <ul>
-            {tasks.map((task) => (
-                <li key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
-                {task.text} 
-                <button onClick={() => handleEditTask(task.id)}>Edit</button>
-                <button onClick={() => handleToggleStatus(task.id)}>
-                {task.status === 'incomplete' ? 'Mark Completed' : 'Mark Incomplete'}
-                </button>
-            </li>
-            ))}
-    </ul>
-
-
-                <div>
-                    <p>Total Tasks: {}</p>
-                    <p>Completed Tasks: {}</p>
-                    <p>Incompleted Tasks: {}</p>
-                </div>
+                <h2 className="">These are your ToDos...</h2>
+                    <ul>
+                        {tasks.map((task) => (
+                            <li key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
+                            {task.text} 
+                            <button onClick={() => handleEditTask(task.id)}>Edit</button>
+                            <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                            <button onClick={() => handleToggleStatus(task.id)}>
+                            {task.status === 'incomplete' ? 'Mark Completed' : 'Mark Incomplete'}
+                            </button>
+                        </li>
+                        ))}
+                    </ul>
+                    <div>
+                        <p>Total Tasks: {totalTasks}</p>
+                        <p>Completed Tasks: {completedTasks}</p>
+                        <p>Incompleted Tasks: {incompletedTasks}</p>
+                    </div>
                 </div>
 
             </div>
