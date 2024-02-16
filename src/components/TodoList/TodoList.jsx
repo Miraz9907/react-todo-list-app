@@ -4,6 +4,7 @@ import "./TodoList.css";
 import {FaEdit } from 'react-icons/fa';
 import { MdDeleteOutline } from "react-icons/md";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const priorities = {
     low: "green",
@@ -56,14 +57,26 @@ const TodoList = () => {
 
             //value pass to localstorage
             savaTasksToLocalStorage(updatedTasks);
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Your Todo Add on the list",
+                showConfirmButton: false,
+                timer: 2000
+              });
 
-            //after add task noe clear input fiels
+            //after add task now clear input fiels
             setInput('');
             setPriority('low');
             setStatus('incomplete')
         }
         else{
-            alert('Please Add your Task before!!')
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Please enter your task before adding.!"
+              });
+              
         }
     };
 
@@ -79,6 +92,14 @@ const TodoList = () => {
                 //save to localStorage
                 savaTasksToLocalStorage(updatedTasks);
         }
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "You have successfully edit your todo...",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
     };
 
     const handleToggleStatus = (id) => {
@@ -103,6 +124,15 @@ const TodoList = () => {
           savaTasksToLocalStorage()
         //   saveTasksToLocalStorage(updatedTasks);
         }
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "You have successfully delete your todo...",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          
     };
 
     const totalTasks = tasks.length;
