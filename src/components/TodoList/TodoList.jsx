@@ -78,6 +78,16 @@ const TodoList = () => {
         }
     };
 
+    const handleToggleStatus = (id) => {
+        const updatedTasks = tasks.map(task =>
+          task.id === id ? { ...task, status: task.status === 'incomplete' ? 'completed' : 'incomplete' } : task
+        );
+    
+        // Update state and save tasks to localStorage
+        setTasks(updatedTasks);
+        savaTasksToLocalStorage(updatedTasks);
+      };
+
     
    
     return (
@@ -115,9 +125,10 @@ const TodoList = () => {
             {tasks.map((task) => (
                 <li key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
                 {task.text} 
-                
                 <button onClick={() => handleEditTask(task.id)}>Edit</button>
-                
+                <button onClick={() => handleToggleStatus(task.id)}>
+                {task.status === 'incomplete' ? 'Mark Completed' : 'Mark Incomplete'}
+                </button>
             </li>
             ))}
     </ul>
