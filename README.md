@@ -1,8 +1,25 @@
-# React + Vite
+# ToDo List App
+- A to-do apps are popular for individuals, professionals, and teams as they provide a systematic way to plan and prioritize activities. This application designed to help users organize, manage, and keep track of their tasks and responsibilities.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Live site link
+- Website live link: [ToDo List App]
 
-Currently, two official plugins are available:
+## Website Name: 
+ToDo List 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### features and Funtionalities of website
+- These apps provide a digital platform where users can create, edit, delete and organize a list of tasks they need to accomplish<br/>
+- The main purpose of a to-do list app is to facilitate task management, enhance productivity, and help users stay organized. <br/>
+- Users can add new tasks to the list, specifying details such as what is the plan, making reminder <br/>
+- Users can assign priority levels to tasks, helping them focus on the most important or time-sensitive activities <br/>
+- Users can mark tasks as completed or incompleted. <br/>
+- Users can delete any to-do list from the task list if they completed the task or less important. <br/>
+
+### framework/library
+- CSS
+- react js
+- localStorage
+- react icons font awesome
+- react sweetalert  
+
+
