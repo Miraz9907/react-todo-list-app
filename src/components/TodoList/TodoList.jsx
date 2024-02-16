@@ -11,7 +11,7 @@ const priorities = {
 const TodoList = () => {
     const [input, setInput] = useState('');
     const [tasks, setTasks] = useState([]);
-    const [priority, setPriority] = useState('low');;
+    const [priority, setPriority] = useState('low');
     const [status, setStatus] = useState('incomplete');
 
     useEffect(()=>{
@@ -64,8 +64,21 @@ const TodoList = () => {
         }
     };
 
-    
+    const handleEditTask = (id) =>{
+        const updatedText = prompt('Edit the Task: ', tasks.find(task => task.id === id)?.text);
 
+        if(updatedText !== null){
+            const updatedTasks = tasks.map(task => 
+                task.id === id? {...task, text: updatedText}:task);
+
+                //update state
+                setTasks(updatedTasks);
+                //save to localStorage
+                savaTasksToLocalStorage(updatedTasks);
+        }
+    };
+
+    
    
     return (
         <div>
@@ -97,6 +110,17 @@ const TodoList = () => {
                 </div>
 
                 <div className="card">
+
+        <ul>
+            {tasks.map((task) => (
+                <li key={task.id} style={{ color: priorities[task.priority], textDecoration: task.status === 'completed' ? 'line-through' : 'none' }}>
+                {task.text} 
+                
+                <button onClick={() => handleEditTask(task.id)}>Edit</button>
+                
+            </li>
+            ))}
+    </ul>
 
 
                 <div>
